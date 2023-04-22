@@ -1,4 +1,4 @@
-@Library('test_jenkins@master') _
+@Library('test_jenkins@main') _
 pipeline {
     agent any
     parameters {

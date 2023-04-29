@@ -2,8 +2,8 @@
 pipeline {
     agent any
     parameters {
-        string(name: 'BRANCH', defaultValue: 'master')
-        string(name: 'REPOSITORY', defaultValue: 'selenium_jobs')
+        string(name: 'BRANCH', defaultValue: 'main')
+        string(name: 'REPOSITORY', defaultValue: 'KNN_DigitRecognition')
     }
     stages {
         stage('Clean workspace'){
@@ -28,20 +28,17 @@ pipeline {
         stage('Run'){
             steps{
                 script{
-                        bat "dir"
-                        bat "pip install -r requirement.txt" 
-                        bat "python DigitRecogition.py"
+                    bat "dir"
+                    bat "pip install -r requirement.txt" 
+                    bat "python DigitRecogition.py"
                 }
             }
         }
-        stage('Archive Images') {
-            steps {
-                archiveArtifacts artifacts: '**/*.png', allowEmptyArchive: true
-            }
-        }
+
     }
     post {
         always {
             cleanWs()
         }
     }
+}

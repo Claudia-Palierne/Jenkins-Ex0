@@ -6,6 +6,7 @@ pipeline {
         string(name: 'REPOSITORY', defaultValue: 'KNN_DigitRecognition')
         string(name: 'FILE', defaultValue: 'DigitRecognition.py')
         string(name: 'TYPE_DOWNLOAD', defaultValue: '.png')
+        string(name: 'ARGS', defaultValue: '')
     }
     stages {
         stage('Clean workspace'){
@@ -32,7 +33,7 @@ pipeline {
                 script{
                     bat "dir"
                     bat "pip install -r requirement.txt" 
-                    bat "python ${params.REPOSITORY}"
+                    bat "python ${params.REPOSITORY} ${params.ARGS}"
                 }
             }
         }

@@ -33,7 +33,7 @@ pipeline {
                 script{
                     bat "dir"
                     bat "pip install -r requirement.txt" 
-                    bat "python ${params.REPOSITORY} ${params.ARGS}"
+                    bat "python ${params.FILE} ${params.ARGS}"
                 }
             }
         }

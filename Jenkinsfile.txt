@@ -25,11 +25,24 @@ pipeline {
                 )
             }
         }
-
-    }
-    post {
+        stage('Run'){
+            steps{
+                script{
+                        bat "dir"
+                        bat "pip install -r requirement.txt" 
+                        bat "python DigitRecogition.py"
+                }
+            }
+        }
+        stage('Archive Images') {
+            steps {
+                archiveArtifacts artifacts: '**/*.png', allowEmptyArchive: true
+            }
+        }
+        post {
         always {
             cleanWs()
         }
     }
-}
+    }
+    

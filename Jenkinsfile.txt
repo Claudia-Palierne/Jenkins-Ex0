@@ -4,6 +4,8 @@ pipeline {
     parameters {
         string(name: 'BRANCH', defaultValue: 'main')
         string(name: 'REPOSITORY', defaultValue: 'KNN_DigitRecognition')
+        string(name: 'FILE', defaultValue: 'DigitRecognition.py')
+        string(name: 'TYPE_DOWNLOAD', defaultValue: '.png')
     }
     stages {
         stage('Clean workspace'){
@@ -30,13 +32,13 @@ pipeline {
                 script{
                     bat "dir"
                     bat "pip install -r requirement.txt" 
-                    bat "python DigitRecogition.py"
+                    bat "python ${params.REPOSITORY}"
                 }
             }
         }
         stage('Archive Images') {
             steps {
-                archiveArtifacts artifacts: '**/*.png', allowEmptyArchive: true
+                archiveArtifacts artifacts: '**/*${params.TYPE_DOWNLOAD}', allowEmptyArchive: true
             }
         }
     }

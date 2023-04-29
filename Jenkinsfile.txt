@@ -34,7 +34,11 @@ pipeline {
                 }
             }
         }
-
+        stage('Archive Images') {
+            steps {
+                archiveArtifacts artifacts: '**/*.png', allowEmptyArchive: true
+            }
+        }
     }
     post {
         always {

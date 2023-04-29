@@ -9,7 +9,7 @@ pipeline {
         string(name: 'ARGS', defaultValue: '')
     }
     stages {
-        stage('Clean workspace'){
+        stage('Clean workspace') {
             steps {
                 cleanWs()
             }
@@ -23,23 +23,19 @@ pipeline {
         stage('Git Checkout') {
             steps {
                 gitCheckout(
-                        branch: "${params.BRANCH}",
-                        url: "https://github.com/Claudia-Palierne/${params.REPOSITORY}.git"
+                    branch: "${params.BRANCH}",
+                    url: "https://github.com/Claudia-Palierne/${params.REPOSITORY}.git"
                 )
             }
         }
-        stage('Run'){
-            steps{
-                script{
-                    bat "dir"
-                    bat "pip install -r requirement.txt" 
-                    bat "python ${params.FILE} ${params.ARGS}"
-                }
-            }
-        }
-        stage('Archive Images') {
+        stage('Run') {
             steps {
-                archiveArtifacts artifacts: '**/*${params.TYPE_DOWNLOAD}', allowEmptyArchive: true
+                script {
+                    bat "dir"
+                    bat "pip install -r requirement.txt"
+                    bat "python ${params.FILE} ${params.ARGS}"
+                    archiveArtifacts artifacts: "**/*${params.TYPE_DOWNLOAD}", allowEmptyArchive: true
+                }
             }
         }
     }

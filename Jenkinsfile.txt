@@ -39,10 +39,9 @@ pipeline {
                 archiveArtifacts artifacts: '**/*.png', allowEmptyArchive: true
             }
         }
-        post {
-            always {
-                cleanWs()
-            }
+    }
+    post {
+        always {
+            cleanWs()
         }
     }
-    
